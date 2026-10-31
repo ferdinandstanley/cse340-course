@@ -1,34 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header', { title }) %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>organizations</title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
+    <main class="container">
+        <section class="page-intro">
+            <h1>
+                <%= title %>
+            </h1>
 
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/categories">Categories</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h1>Organizations</h1>
-        <p>Here are a few of our partner organizations:</p>
-        <ul>
-            <li><img src="/images/brightfuture-logo.png" alt="BrightFuture Builders logo"><strong>BrightFuture
-                    Builders</strong>: info@brightfuture.org</li>
-            <li><img src="/images/greenharvest-logo.png" alt="GreenHarvest Growers logo"><strong>GreenHarvest Growers</strong>:
-                contact@greenharvest.org</li>
-            <li><img src="/images/unityserve-logo.png" alt="UnityServe Volunteers logo"><strong>UnityServe Volunteers</strong>:
-                hello@unityserve.org</li>
-        </ul>
+            <p>
+                Meet our partner organizations working to make
+                a positive difference in communities.
+            </p>
+        </section>
+
+        <section class="organization-grid">
+
+            <article class="organization-card">
+                <img src="/images/brightfuture-logo.png" alt="BrightFuture Builders logo">
+
+                <h2>BrightFuture Builders</h2>
+
+                <p>
+                    Supporting community development and creating
+                    opportunities for a brighter future.
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    info@brightfuture.org
+                </p>
+            </article>
+
+            <article class="organization-card">
+                <img src="/images/greenharvest-logo.png" alt="GreenHarvest Growers logo">
+
+                <h2>GreenHarvest Growers</h2>
+
+                <p>
+                    Promoting environmental sustainability,
+                    agriculture, and greener communities.
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    contact@greenharvest.org
+                </p>
+            </article>
+
+            <article class="organization-card">
+                <img src="/images/unityserve-logo.png" alt="UnityServe Volunteers logo">
+
+                <h2>UnityServe Volunteers</h2>
+
+                <p>
+                    Bringing people together through volunteerism
+                    and meaningful community service.
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    hello@unityserve.org
+                </p>
+            </article>
+
+        </section>
     </main>
-</body>
 
-</html>
+    <%- include('partials/footer') %>

@@ -1,31 +1,396 @@
-html,
-body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
+/* =================================
+   1. GLOBAL STYLES
+================================= */
+
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #10243a;
+    --navy-light: #193b5b;
+    --gold: #d6a84b;
+    --gold-light: #f5e8c8;
+    --white: #ffffff;
+    --background: #f5f7fa;
+    --text: #263445;
+    --muted: #596b7e;
+    --border: #e1e7ee;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--background);
+}
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+.container {
+    width: 90%;
+    max-width: 1150px;
+    margin: 0 auto;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+img {
+    max-width: 100%;
+    height: auto;
+}
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+/* =================================
+   2. HEADER AND NAVIGATION
+================================= */
+
+.site-header {
+    background: var(--navy);
+    padding: 18px 0;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    color: var(--white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+.nav-links a:focus-visible,
+.logo:focus-visible,
+.btn-primary:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
+
+/* =================================
+   3. MAIN CONTENT
+================================= */
+
+main {
+    min-height: 75vh;
+    padding: 55px 0;
+}
+
+.page-intro {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 45px;
+}
+
+.page-intro h1 {
+    color: var(--navy);
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.page-intro p {
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+/* =================================
+   4. HOME PAGE
+================================= */
+
+.home-page {
+    display: flex;
+    align-items: center;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 50px;
+    background: var(--white);
+    padding: 55px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(16, 36, 58, 0.07);
+}
+
+.hero-content h1 {
+    color: var(--gold);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.hero-content h2 {
+    color: var(--navy);
+    font-size: 2.3rem;
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    text-align: center;
+}
+
+.main-logo {
+    width: 100%;
+    max-width: 350px;
+    object-fit: contain;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    padding: 13px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--navy-light);
+}
+
+/* =================================
+   5. ORGANIZATIONS PAGE
+================================= */
+
+.organization-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.organization-card {
+    background: var(--white);
+    padding: 30px 25px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 5px 18px rgba(16, 36, 58, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.organization-card:hover {
+    transform: translateY(-5px);
+}
+
+.organization-card img {
+    width: 160px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 18px;
+}
+
+.organization-card h2 {
+    color: var(--navy);
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.organization-card p {
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+/* =================================
+   6. PROJECTS PAGE
+================================= */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.project-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 5px 18px rgba(16, 36, 58, 0.05);
+    border-top: 4px solid var(--gold);
+}
+
+.project-card h2 {
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.project-card p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.project-category {
+    display: inline-block;
+    background: var(--gold-light);
+    color: var(--navy);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* =================================
+   7. CATEGORIES PAGE
+================================= */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.category-card {
+    background: var(--white);
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--gold);
+    box-shadow: 0 5px 18px rgba(16, 36, 58, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card h2 {
+    color: var(--navy);
+    margin-bottom: 12px;
+}
+
+.category-card p {
+    color: var(--muted);
+}
+
+/* =================================
+   8. FOOTER
+================================= */
+
+.site-footer {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.site-footer p {
+    font-size: 0.9rem;
+}
+
+/* =================================
+   9. TABLET RESPONSIVENESS
+================================= */
+
+@media (max-width: 900px) {
+
+    .organization-grid,
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        grid-template-columns: 1fr 1fr;
+        padding: 35px;
+        gap: 25px;
+    }
+
+    .hero-content h2 {
+        font-size: 1.9rem;
+    }
+}
+
+/* =================================
+   10. MOBILE RESPONSIVENESS
+================================= */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 18px;
+    }
+
+    .logo {
+        font-size: 1.15rem;
+        text-align: center;
+    }
+
+    main {
+        padding: 35px 0;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 28px 20px;
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-image {
+        order: -1;
+    }
+
+    .main-logo {
+        max-width: 230px;
+    }
+
+    .organization-grid,
+    .project-grid,
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-intro h1 {
+        font-size: 2rem;
+    }
+
+    .organization-card,
+    .project-card,
+    .category-card {
+        padding: 25px 20px;
     }
 }

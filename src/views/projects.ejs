@@ -1,31 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header', { title }) %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projects</title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
+    <main class="container">
 
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/categories">Categories</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h1>Projects</h1>
-        <h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-        </ul>
+        <section class="page-intro">
+            <h1>
+                <%= title %>
+            </h1>
+
+            <p>
+                Discover upcoming opportunities to serve,
+                volunteer, and make a difference.
+            </p>
+        </section>
+
+        <section class="project-grid">
+
+            <article class="project-card">
+                <h2>Park Cleanup</h2>
+
+                <p>
+                    Join us to clean up local parks, remove litter,
+                    and make our public spaces more beautiful.
+                </p>
+
+                <span class="project-category">Environmental</span>
+            </article>
+
+            <article class="project-card">
+                <h2>Food Drive</h2>
+
+                <p>
+                    Help collect and distribute food to individuals
+                    and families in need.
+                </p>
+
+                <span class="project-category">Community Service</span>
+            </article>
+
+            <article class="project-card">
+                <h2>Community Tutoring</h2>
+
+                <p>
+                    Volunteer to tutor students in various subjects
+                    and support educational development.
+                </p>
+
+                <span class="project-category">Educational</span>
+            </article>
+
+        </section>
+
     </main>
-</body>
 
-</html>
+    <%- include('partials/footer') %>
