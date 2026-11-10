@@ -148,3 +148,124 @@ SELECT * FROM organization;
 -- ==========================================
 
 SELECT * FROM service_project;
+
+
+-- ==========================================
+-- CREATE CATEGORY TABLE
+-- ==========================================
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ==========================================
+-- INSERT CATEGORIES
+-- ==========================================
+
+INSERT INTO category (name)
+VALUES
+    ('Community Development'),
+    ('Environmental'),
+    ('Education'),
+    ('Health and Welfare'),
+    ('Food Security');
+
+-- ==========================================
+-- CREATE PROJECT_CATEGORY TABLE
+-- Many-to-many relationship between projects and categories
+-- ==========================================
+
+CREATE TABLE project_category (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id),
+
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+);
+
+-- ==========================================
+-- ASSOCIATE PROJECTS WITH CATEGORIES
+-- ==========================================
+
+INSERT INTO project_category (project_id, category_id)
+SELECT
+    sp.project_id,
+    c.category_id
+FROM (
+    VALUES
+        ('Community School Renovation', 'Community Development'),
+        ('Community School Renovation', 'Education'),
+        ('Rural Road Improvement', 'Community Development'),
+        ('Safe Drinking Water Initiative', 'Community Development'),
+        ('Safe Drinking Water Initiative', 'Health and Welfare'),
+        ('Community Health Center Construction', 'Health and Welfare'),
+        ('Community Health Center Construction', 'Community Development'),
+        ('Affordable Housing Project', 'Community Development'),
+        ('Urban Community Garden', 'Environmental'),
+        ('Urban Community Garden', 'Food Security'),
+        ('School Vegetable Garden Program', 'Education'),
+        ('School Vegetable Garden Program', 'Food Security'),
+        ('Sustainable Farming Workshop', 'Education'),
+        ('Sustainable Farming Workshop', 'Food Security'),
+        ('Tree Planting Initiative', 'Environmental'),
+        ('Community Composting Project', 'Environmental'),
+        ('Neighborhood Cleanup', 'Environmental'),
+        ('Neighborhood Cleanup', 'Community Development'),
+        ('Food Donation Drive', 'Food Security'),
+        ('Food Donation Drive', 'Health and Welfare'),
+        ('Elderly Care Outreach', 'Health and Welfare'),
+        ('Community Tutoring Program', 'Education'),
+        ('Homeless Support Initiative', 'Health and Welfare'),
+        ('Homeless Support Initiative', 'Community Development')
+) AS project_categories(project_title, category_name)
+INNER JOIN service_project AS sp
+    ON sp.title = project_categories.project_title
+INNER JOIN category AS c
+    ON c.name = project_categories.category_name;
+
+-- ==========================================
+-- VERIFY CATEGORY RECORDS
+-- ==========================================
+
+SELECT * FROM category;
+
+-- ==========================================
+-- VERIFY PROJECT-CATEGORY RELATIONSHIPS
+-- ==========================================
+
+SELECT
+    sp.title AS project_title,
+    c.name AS category_name
+FROM project_category AS pc
+INNER JOIN service_project AS sp
+    ON pc.project_id = sp.project_id
+INNER JOIN category AS c
+    ON pc.category_id = c.category_id
+ORDER BY sp.project_id, c.category_id;
+
+-- ==========================================
+-- VERIFY TOTAL ASSOCIATIONS
+-- Expected: 24
+-- ==========================================
+
+SELECT COUNT(*) AS total_associations
+FROM project_category;
+
+-- ==========================================
+-- VERIFY EVERY PROJECT HAS A CATEGORY
+-- Expected: 0
+-- ==========================================
+
+SELECT COUNT(*) AS projects_without_categories
+FROM service_project AS sp
+LEFT JOIN project_category AS pc
+    ON sp.project_id = pc.project_id
+WHERE pc.project_id IS NULL;
