@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import { testConnection } from './src/models/db.js';
+import { getAllOrganizations } from './src/models/organization.js';
 
 const app = express();
 
@@ -26,7 +27,19 @@ app.get('/', async (req, res) => {
 
 app.get('/organizations', async (req, res) => {
     const title = 'Our Partner Organizations';
-    res.render('organizations', { title });
+
+    try {
+        const organizations = await getAllOrganizations();
+
+        res.render('organizations', {
+            title,
+            organizations
+        });
+
+    } catch (error) {
+        console.error('Error loading organizations:', error);
+        res.status(500).send('Unable to load organizations.');
+    }
 });
 
 app.get('/projects', async (req, res) => {
