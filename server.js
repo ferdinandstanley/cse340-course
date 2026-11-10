@@ -3,6 +3,7 @@ import express from 'express';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organization.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
 
 const app = express();
 
@@ -62,7 +63,19 @@ app.get('/projects', async (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const title = 'Service Project Categories';
-    res.render('categories', { title });
+
+    try {
+        const categories = await getAllCategories();
+
+        res.render('categories', {
+            title,
+            categories
+        });
+
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        res.status(500).send('Unable to load categories.');
+    }
 });
 
 // Start server and test database connection
