@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organization.js';
+import { getAllProjects } from './src/models/project.js';
 
 const app = express();
 
@@ -44,7 +45,19 @@ app.get('/organizations', async (req, res) => {
 
 app.get('/projects', async (req, res) => {
     const title = 'Service Projects';
-    res.render('projects', { title });
+
+    try {
+        const projects = await getAllProjects();
+
+        res.render('projects', {
+            title,
+            projects
+        });
+
+    } catch (error) {
+        console.error('Error loading service projects:', error);
+        res.status(500).send('Unable to load service projects.');
+    }
 });
 
 app.get('/categories', async (req, res) => {
