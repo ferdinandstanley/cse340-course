@@ -14,53 +14,38 @@
 
         <section class="organization-grid">
 
-            <article class="organization-card">
-                <img src="/images/brightfuture-logo.png" alt="BrightFuture Builders logo">
+            <% if (organizations.length===0) { %>
 
-                <h2>BrightFuture Builders</h2>
+                <p>No organizations are currently available.</p>
 
-                <p>
-                    Supporting community development and creating
-                    opportunities for a brighter future.
-                </p>
+                <% } else { %>
 
-                <p>
-                    <strong>Email:</strong>
-                    info@brightfuture.org
-                </p>
-            </article>
+                    <% organizations.forEach(organization=> { %>
 
-            <article class="organization-card">
-                <img src="/images/greenharvest-logo.png" alt="GreenHarvest Growers logo">
+                        <article class="organization-card">
 
-                <h2>GreenHarvest Growers</h2>
+                            <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
 
-                <p>
-                    Promoting environmental sustainability,
-                    agriculture, and greener communities.
-                </p>
+                            <h2>
+                                <%= organization.name %>
+                            </h2>
 
-                <p>
-                    <strong>Email:</strong>
-                    contact@greenharvest.org
-                </p>
-            </article>
+                            <p>
+                                <%= organization.description %>
+                            </p>
 
-            <article class="organization-card">
-                <img src="/images/unityserve-logo.png" alt="UnityServe Volunteers logo">
+                            <p>
+                                <strong>Email:</strong>
+                                <a href="mailto:<%= organization.contact_email %>">
+                                    <%= organization.contact_email %>
+                                </a>
+                            </p>
 
-                <h2>UnityServe Volunteers</h2>
+                        </article>
 
-                <p>
-                    Bringing people together through volunteerism
-                    and meaningful community service.
-                </p>
+                        <% }); %>
 
-                <p>
-                    <strong>Email:</strong>
-                    hello@unityserve.org
-                </p>
-            </article>
+                            <% } %>
 
         </section>
     </main>
