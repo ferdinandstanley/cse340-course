@@ -12,37 +12,25 @@
         </section>
 
         <section class="category-grid">
-            <article class="category-card">
-                <h2>Environmental</h2>
-                <p>
-                    Participate in activities that protect the environment,
-                    promote sustainability, and improve our surroundings.
-                </p>
-            </article>
 
-            <article class="category-card">
-                <h2>Educational</h2>
-                <p>
-                    Support learning opportunities, mentorship,
-                    literacy, and educational development.
-                </p>
-            </article>
+            <% if (categories && categories.length> 0) { %>
 
-            <article class="category-card">
-                <h2>Community Service</h2>
-                <p>
-                    Help communities through volunteering,
-                    neighborhood improvement, and outreach programs.
-                </p>
-            </article>
+                <% categories.forEach(category=> { %>
 
-            <article class="category-card">
-                <h2>Health and Wellness</h2>
-                <p>
-                    Promote healthy living, wellness awareness,
-                    and support for people in need.
-                </p>
-            </article>
+                    <article class="category-card">
+                        <h2>
+                            <%= category.name %>
+                        </h2>
+                    </article>
+
+                    <% }); %>
+
+                        <% } else { %>
+
+                            <p>No categories are currently available.</p>
+
+                            <% } %>
+
         </section>
     </main>
 
