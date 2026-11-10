@@ -1,4 +1,6 @@
-
+-- IMPORTANT:
+-- Run this file once when setting up a fresh database.
+-- Do not rerun against an already-populated database.
 -- ========================================
 -- Create Organization Table
 -- ========================================
