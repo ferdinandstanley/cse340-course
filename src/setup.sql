@@ -37,8 +37,30 @@ VALUES
     'unityserve-logo.png'
 );
 
+
+-- Create Service Project Table
+
+CREATE TABLE service_project (
+    project_id SERIAL PRIMARY KEY,
+    organization_id INTEGER NOT NULL,
+    title VARCHAR(150) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+
+    CONSTRAINT fk_organization
+        FOREIGN KEY (organization_id)
+        REFERENCES organization(organization_id)
+);
+
 -- ==========================================
 -- VERIFY ORGANIZATION RECORDS
 -- ==========================================
 
 SELECT * FROM organization;
+
+-- ==========================================
+-- VERIFY SERVICE PROJECT RECORDS
+-- ==========================================
+
+SELECT * FROM service_project;
