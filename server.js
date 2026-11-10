@@ -1,7 +1,11 @@
-const express = require('express');
+import 'dotenv/config';
+import express from 'express';
+import { testConnection } from './src/models/db.js';
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Set the view engine
 app.set('view engine', 'ejs');
@@ -35,7 +39,15 @@ app.get('/categories', async (req, res) => {
     res.render('categories', { title });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// Start server and test database connection
+app.listen(PORT, async () => {
+    try {
+        await testConnection();
+
+        console.log(`Server is running at http://127.0.0.1:${PORT}`);
+        console.log(`Environment: ${NODE_ENV}`);
+
+    } catch (error) {
+        console.error('Error connecting to the database:', error);
+    }
 });
