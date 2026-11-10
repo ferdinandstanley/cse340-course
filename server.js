@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organization.js';
-import { getAllProjects } from './src/models/project.js';
+import { getAllProjects } from './src/models/projects.js';
 
 const app = express();
 
