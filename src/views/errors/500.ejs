@@ -1,0 +1,19 @@
+<%- include('../partials/header', { title: 'Server Error' }) %>
+
+    <main class="container">
+        <section class="page-intro">
+            <h1>500 - Server Error</h1>
+            <p>Sorry, something went wrong while processing your request.</p>
+            <a href="/" class="btn">Return to Home</a>
+
+            <% if (NODE_ENV==='development' ) { %>
+                <h2>Error Details</h2>
+                <p>
+                    <%= error %>
+                </p>
+                <pre><%= stack %></pre>
+                <% } %>
+        </section>
+    </main>
+
+    <%- include('../partials/footer') %>
