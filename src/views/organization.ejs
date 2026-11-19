@@ -1,0 +1,64 @@
+<%- include('partials/header', { title }) %>
+
+    <main class="container">
+        <section class="page-intro">
+            <h1>
+                <%= organizationDetails.name %>
+            </h1>
+            <p>Learn more about this partner organization and its service projects.</p>
+        </section>
+
+        <section class="organization-details">
+            <article class="organization-card">
+                <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo"
+                    class="organization-logo">
+
+                <h2>About the Organization</h2>
+                <p>
+                    <%= organizationDetails.description %>
+                </p>
+
+                <p>
+                    <strong>Contact Email:</strong>
+                    <a href="mailto:<%= organizationDetails.contact_email %>">
+                        <%= organizationDetails.contact_email %>
+                    </a>
+                </p>
+            </article>
+        </section>
+
+        <section class="organization-projects">
+            <h2>Service Projects</h2>
+
+            <% if (projects && projects.length> 0) { %>
+                <div class="project-grid">
+                    <% projects.forEach(project=> { %>
+                        <article class="project-card">
+                            <h3>
+                                <a href="/project/<%= project.project_id %>">
+                                    <%= project.title %>
+                                </a>
+                            </h3>
+                            <p>
+                                <%= project.description %>
+                            </p>
+                            <p><strong>Location:</strong>
+                                <%= project.location %>
+                            </p>
+                            <p>
+                                <strong>Date:</strong>
+                                <%= project.date.toLocaleDateString('en-GB', { day: 'numeric' , month: 'long' ,
+                                    year: 'numeric' , timeZone: 'UTC' }) %>
+                            </p>
+                        </article>
+                        <% }); %>
+                </div>
+                <% } else { %>
+                    <p>This organization currently has no service projects.</p>
+                    <% } %>
+        </section>
+
+        <p><a href="/organizations">← Back to Organizations</a></p>
+    </main>
+
+    <%- include('partials/footer') %>
