@@ -586,3 +586,204 @@ main.container>p:last-child a:focus-visible {
         padding: 6px 12px;
     }
 }
+
+/* =========================================
+   13. PROFESSIONAL FORM DESIGN
+========================================= */
+
+.form-page {
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.form-card {
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-card h1 {
+    color: #182B35;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.form-description {
+    color: #64748b;
+    margin-bottom: 35px;
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #182B35;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d8dee5;
+    border-radius: 7px;
+    background: #f9fafb;
+    color: #182B35;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #cba352;
+    box-shadow: 0 0 0 3px rgba(203, 163, 82, 0.15);
+    background: #ffffff;
+}
+
+.form-card button {
+    background: #cba352;
+    color: #182B35;
+    border: none;
+    border-radius: 7px;
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.form-card button:hover {
+    background: #b58d3f;
+    transform: translateY(-2px);
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.cancel-link {
+    color: #182B35;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 18px;
+}
+
+.cancel-link:hover {
+    color: #cba352;
+}
+
+.form-card .alert {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .form-page {
+        margin: 25px auto;
+        padding: 12px;
+    }
+
+    .form-card {
+        padding: 25px 18px;
+    }
+
+    .form-card h1 {
+        font-size: 1.7rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-card button {
+        width: 100%;
+    }
+
+    .cancel-link {
+        text-align: center;
+    }
+}
+
+/* Organization detail page actions */
+.organization-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 35px;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.action-button:visited {
+    text-decoration: none;
+}
+
+.edit-button,
+.edit-button:visited {
+    background: #cba352;
+    color: #182B35;
+}
+
+.edit-button:hover {
+    background: #b58d3f;
+    color: #182B35;
+    transform: translateY(-2px);
+}
+
+.back-button,
+.back-button:visited {
+    background: #182B35;
+    color: #ffffff;
+}
+
+.back-button:hover {
+    background: #263f4c;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .organization-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-button {
+        text-align: center;
+    }
+}
