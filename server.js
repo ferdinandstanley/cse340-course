@@ -4,6 +4,8 @@ import express from 'express';
 
 import { testConnection } from './src/models/db.js';
 import router from './src/routes.js';
+import session from 'express-session';
+import flashMiddleware from './src/middleware/flash.js';
 
 const app = express();
 
@@ -18,6 +20,21 @@ app.set('views', './src/views');
 
 // Make NODE_ENV available in EJS templates
 app.locals.NODE_ENV = NODE_ENV;
+
+// Configure session middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
+
+// Configure flash messages
+app.use(flashMiddleware);
 
 // Middleware to process form submissions
 app.use(express.urlencoded({ extended: true }));

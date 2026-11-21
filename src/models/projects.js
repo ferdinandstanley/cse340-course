@@ -80,3 +80,75 @@ export const getProjectDetails = async (id) => {
 
     return result.rows[0];
 };
+
+// Create a new service project
+export const createProject = async (
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const sql = `
+        INSERT INTO service_project (
+            title,
+            description,
+            location,
+            date,
+            organization_id
+        )
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id;
+    `;
+
+    const values = [
+        title,
+        description,
+        location,
+        date,
+        organizationId
+    ];
+
+    const result = await db.query(sql, values);
+
+    return result.rows[0];
+};
+
+// Update an existing service project
+export const updateProject = async (
+    projectId,
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const sql = `
+        UPDATE service_project
+        SET
+            title = $1,
+            description = $2,
+            location = $3,
+            date = $4,
+            organization_id = $5
+        WHERE project_id = $6
+        RETURNING project_id;
+    `;
+
+    const values = [
+        title,
+        description,
+        location,
+        date,
+        organizationId,
+        projectId
+    ];
+
+    const result = await db.query(sql, values);
+
+    if (result.rowCount === 0) {
+        throw new Error('Service project not found');
+    }
+
+    return result.rows[0];
+};

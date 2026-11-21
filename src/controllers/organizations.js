@@ -86,6 +86,9 @@ export async function processEditOrganizationForm(req, res, next) {
             logoFilename
         );
 
+        // Display success message
+        req.flash('success', 'Organization updated successfully!');
+
         res.redirect(`/organization/${organizationId}`);
     } catch (error) {
         next(error);

@@ -2,6 +2,17 @@
 
     <main class="container">
         <h1>Edit Organization</h1>
+        <% if (typeof errors !=='undefined' && errors.length> 0) { %>
+            <div class="alert error">
+                <ul>
+                    <% errors.forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+            <% } %>
 
         <form action="/edit-organization/<%= organizationDetails.organization_id %>" method="POST">
 

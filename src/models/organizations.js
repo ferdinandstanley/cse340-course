@@ -33,13 +33,14 @@ export const getOrganizationDetails = async (organizationId) => {
     return result.rows[0];
 };
 
-export async function updateOrganization(
+// Update an existing organization
+export const updateOrganization = async (
     organizationId,
     name,
     description,
     contactEmail,
     logoFilename
-) {
+) => {
     const sql = `
         UPDATE organization
         SET name = $1,
@@ -58,11 +59,11 @@ export async function updateOrganization(
         organizationId
     ];
 
-    const result = await pool.query(sql, values);
+    const result = await db.query(sql, values);
 
     if (result.rowCount === 0) {
         throw new Error('Organization not found');
     }
 
     return result.rows[0];
-}
+};

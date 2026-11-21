@@ -28,3 +28,15 @@
             </nav>
         </div>
     </header>
+
+    <% const messages = flash(); %>
+
+    <% if (messages) { %>
+        <% Object.keys(messages).forEach(type => { %>
+            <% messages[type].forEach(message => { %>
+                <div class="alert <%= type %>">
+                    <%= message %>
+                </div>
+            <% }) %>
+        <% }) %>
+    <% } %>
