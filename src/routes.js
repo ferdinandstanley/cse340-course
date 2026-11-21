@@ -4,7 +4,9 @@ import express from 'express';
 import { showHomePage } from './controllers/index.js';
 import {
     showOrganizationsPage,
-    showOrganizationDetailsPage
+    showOrganizationDetailsPage,
+    showEditOrganizationForm,
+    processEditOrganizationForm
 } from './controllers/organizations.js';
 import {
     showProjectsPage,
@@ -26,6 +28,9 @@ router.get('/organizations', showOrganizationsPage);
 
 // Individual organization details
 router.get('/organization/:id', showOrganizationDetailsPage);
+
+router.get('/edit-organization/:id', showEditOrganizationForm);
+router.post('/edit-organization/:id', processEditOrganizationForm);
 
 // Projects page
 router.get('/projects', showProjectsPage);

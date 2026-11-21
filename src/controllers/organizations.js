@@ -1,7 +1,8 @@
 
 import {
     getAllOrganizations,
-    getOrganizationDetails
+    getOrganizationDetails,
+    updateOrganization
 } from '../models/organizations.js';
 
 import { getProjectsByOrganizationId } from '../models/projects.js';
@@ -44,3 +45,49 @@ export {
     showOrganizationsPage,
     showOrganizationDetailsPage
 };
+
+export async function showEditOrganizationForm(req, res, next) {
+    try {
+        const organizationId = req.params.id;
+
+        const organizationDetails = await getOrganizationDetails(organizationId);
+
+        if (!organizationDetails) {
+            const error = new Error('Organization not found');
+            error.status = 404;
+            throw error;
+        }
+
+        res.render('edit-organization', {
+            title: 'Edit Organization',
+            organizationDetails
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function processEditOrganizationForm(req, res, next) {
+    try {
+        const organizationId = req.params.id;
+
+        const {
+            name,
+            description,
+            contactEmail,
+            logoFilename
+        } = req.body;
+
+        await updateOrganization(
+            organizationId,
+            name,
+            description,
+            contactEmail,
+            logoFilename
+        );
+
+        res.redirect(`/organization/${organizationId}`);
+    } catch (error) {
+        next(error);
+    }
+}

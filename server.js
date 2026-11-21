@@ -19,6 +19,9 @@ app.set('views', './src/views');
 // Make NODE_ENV available in EJS templates
 app.locals.NODE_ENV = NODE_ENV;
 
+// Middleware to process form submissions
+app.use(express.urlencoded({ extended: true }));
+
 // Serve static files
 app.use(express.static('public'));
 

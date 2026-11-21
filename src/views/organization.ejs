@@ -58,7 +58,15 @@
                     <% } %>
         </section>
 
-        <p><a href="/organizations">← Back to Organizations</a></p>
+        <div class="organization-actions">
+            <a href="/edit-organization/<%= organizationDetails.organization_id %>">
+                Edit Organization
+            </a>
+        
+            <a href="/organizations">
+                ← Back to Organizations
+            </a>
+        </div>
     </main>
 
     <%- include('partials/footer') %>
