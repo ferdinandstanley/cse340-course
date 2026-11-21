@@ -8,7 +8,9 @@
             </h1>
 
             <div class="project-actions">
-                <a href="/new-project">Create New Service Project</a>
+                <a href="/new-project" class="action-button edit-button">
+                    + Create New Service Project
+                </a>
             </div>
 
             <p>
@@ -30,7 +32,7 @@
                         <article class="project-card">
 
                             <h2>
-                                <a href="/project/<%= project.project_id %>">
+                                <a class="project-title-link" href="/project/<%= project.project_id %>">
                                     <%= project.title %>
                                 </a>
                             </h2>
@@ -41,7 +43,7 @@
 
                             <p>
                                 <strong>Organization:</strong>
-                                <a href="/organization/<%= project.organization_id %>">
+                                <a class="organization-link" href="/organization/<%= project.organization_id %>">
                                     <%= project.organization_name %>
                                 </a>
                             </p>
@@ -53,8 +55,8 @@
 
                             <p>
                                 <strong>Date:</strong>
-                                <%= new Date(project.date).toLocaleDateString('en-GB', { day: 'numeric' , month: 'long'
-                                    , year: 'numeric' , timeZone: 'UTC' }) %>
+                                <%= new Date(project.date).toLocaleDateString( 'en-GB' , { day: 'numeric' ,
+                                    month: 'long' , year: 'numeric' , timeZone: 'UTC' } ) %>
                             </p>
 
                         </article>

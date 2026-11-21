@@ -840,3 +840,44 @@ main.container>p:last-child a:focus-visible {
         text-align: center;
     }
 }
+
+/* Projects page link styling */
+
+.project-actions .action-button {
+    text-decoration: none;
+}
+
+.project-title-link,
+.project-title-link:visited {
+    color: #182B35;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.project-title-link:hover {
+    color: #cba352;
+}
+
+.organization-link,
+.organization-link:visited {
+    color: #182B35;
+    text-decoration: none;
+    border-bottom: 1px solid #cba352;
+}
+
+.organization-link:hover {
+    color: #b58d3f;
+}
+
+/* Center Create New Service Project button */
+.project-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 25px auto 30px;
+}
+
+.project-actions .action-button {
+    text-align: center;
+}
