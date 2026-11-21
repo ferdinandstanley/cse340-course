@@ -787,3 +787,56 @@ main.container>p:last-child a:focus-visible {
         text-align: center;
     }
 }
+
+/* Project details action buttons */
+.project-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 35px;
+}
+
+.project-actions .action-button {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.project-actions .edit-button,
+.project-actions .edit-button:visited {
+    background: #cba352;
+    color: #182B35;
+}
+
+.project-actions .edit-button:hover {
+    background: #b58d3f;
+    color: #182B35;
+}
+
+.project-actions .back-button,
+.project-actions .back-button:visited {
+    background: #182B35;
+    color: #ffffff;
+}
+
+.project-actions .back-button:hover {
+    background: #263f4c;
+    color: #ffffff;
+}
+
+@media (max-width: 600px) {
+    .project-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .project-actions .action-button {
+        text-align: center;
+    }
+}

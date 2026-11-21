@@ -53,20 +53,18 @@
         </section>
 
         <div class="project-actions">
-            <a href="/assign-categories/<%= project.project_id %>">
+            <a class="action-button edit-button" href="/assign-categories/<%= project.project_id %>">
                 Assign Categories
             </a>
-        </div>
-
-        <div class="project-actions">
-            <a href="/edit-project/<%= project.project_id %>">
+        
+            <a class="action-button edit-button" href="/edit-project/<%= project.project_id %>">
                 Edit Project
             </a>
+        
+            <a class="action-button back-button" href="/projects">
+                ← Back to Service Projects
+            </a>
         </div>
-
-        <p>
-            <a href="/projects">← Back to Service Projects</a>
-        </p>
     </main>
 
     <%- include('partials/footer') %>
