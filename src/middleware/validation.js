@@ -152,3 +152,47 @@ export const checkEditProjectData = async (req, res, next) => {
 
     next();
 };
+
+
+ // Category validation rules
+export const categoryValidation = [
+    body('name')
+        .trim()
+        .notEmpty()
+        .withMessage('Category name is required.')
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Category name must be between 3 and 100 characters.')
+];
+
+// Check new category validation results
+export const checkNewCategoryData = (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).render('new-category', {
+            title: 'Create New Category',
+            category: req.body,
+            errors: errors.array()
+        });
+    }
+
+    next();
+};
+
+// Check edit category validation results
+export const checkEditCategoryData = (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).render('edit-category', {
+            title: 'Edit Category',
+            category: {
+                category_id: req.params.id,
+                name: req.body.name
+            },
+            errors: errors.array()
+        });
+    }
+
+    next();
+};

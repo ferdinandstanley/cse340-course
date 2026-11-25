@@ -5,7 +5,10 @@ import {
     checkNewOrganizationData,
     projectValidation,
     checkProjectData,
-    checkEditProjectData
+    checkEditProjectData,
+    categoryValidation,
+    checkNewCategoryData,
+    checkEditCategoryData
 } from './middleware/validation.js';
 
 import express from 'express';
@@ -33,6 +36,10 @@ import {
 import {
     showCategoriesPage,
     showCategoryDetailsPage,
+    showNewCategoryForm,
+    processNewCategoryForm,
+    showEditCategoryForm,
+    processEditCategoryForm,
     showAssignCategoriesForm,
     processAssignCategoriesForm
 } from './controllers/categories.js';
@@ -48,9 +55,8 @@ router.get('/', showHomePage);
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
 
-// Create a new organization
+// Create organization
 router.get('/new-organization', showNewOrganizationForm);
-
 router.post(
     '/new-organization',
     organizationValidation,
@@ -58,9 +64,8 @@ router.post(
     processNewOrganizationForm
 );
 
-// Edit an existing organization
+// Edit organization
 router.get('/edit-organization/:id', showEditOrganizationForm);
-
 router.post(
     '/edit-organization/:id',
     organizationValidation,
@@ -71,9 +76,8 @@ router.post(
 // Projects
 router.get('/projects', showProjectsPage);
 
-// Create a new service project
+// Create project
 router.get('/new-project', showNewProjectForm);
-
 router.post(
     '/new-project',
     projectValidation,
@@ -81,9 +85,8 @@ router.post(
     processNewProjectForm
 );
 
-// Edit an existing service project
+// Edit project
 router.get('/edit-project/:id', showEditProjectForm);
-
 router.post(
     '/edit-project/:id',
     projectValidation,
@@ -91,20 +94,37 @@ router.post(
     processEditProjectForm
 );
 
-// Individual service project details
+// Individual project details
 router.get('/project/:id', showProjectDetailsPage);
-
-// Assign categories to a project
-router.get('/assign-categories/:projectId', showAssignCategoriesForm);
-
-router.post(
-    '/assign-categories/:projectId',
-    processAssignCategoriesForm
-);
 
 // Categories
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
+
+// Create category
+router.get('/new-category', showNewCategoryForm);
+router.post(
+    '/new-category',
+    categoryValidation,
+    checkNewCategoryData,
+    processNewCategoryForm
+);
+
+// Edit category
+router.get('/edit-category/:id', showEditCategoryForm);
+router.post(
+    '/edit-category/:id',
+    categoryValidation,
+    checkEditCategoryData,
+    processEditCategoryForm
+);
+
+// Assign categories to a project
+router.get('/assign-categories/:projectId', showAssignCategoriesForm);
+router.post(
+    '/assign-categories/:projectId',
+    processAssignCategoriesForm
+);
 
 // Test route for server errors
 router.get('/test-error', testErrorPage);

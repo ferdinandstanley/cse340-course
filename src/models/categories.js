@@ -115,3 +115,35 @@ export const updateCategoryAssignments = async (projectId, categoryIds) => {
         }
     }
 };
+
+
+// Create a new category
+export const createCategory = async (name) => {
+    const sql = `
+        INSERT INTO category (name)
+        VALUES ($1)
+        RETURNING category_id;
+    `;
+
+    const result = await db.query(sql, [name]);
+
+    return result.rows[0];
+};
+
+// Update an existing category
+export const updateCategory = async (categoryId, name) => {
+    const sql = `
+        UPDATE category
+        SET name = $1
+        WHERE category_id = $2
+        RETURNING category_id;
+    `;
+
+    const result = await db.query(sql, [name, categoryId]);
+
+    if (result.rowCount === 0) {
+        throw new Error('Category not found');
+    }
+
+    return result.rows[0];
+};
