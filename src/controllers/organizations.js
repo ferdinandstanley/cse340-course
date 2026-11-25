@@ -54,7 +54,8 @@ const showOrganizationDetailsPage = async (req, res, next) => {
 const showNewOrganizationForm = (req, res) => {
     res.render('new-organization', {
         title: 'Create New Organization',
-        organization: {}
+        organization: {},
+        errors: []
     });
 };
 

@@ -5,9 +5,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon server.js",
     "start": "node server.js"
-  },
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ferdinandstanley/cse340-course.git"
