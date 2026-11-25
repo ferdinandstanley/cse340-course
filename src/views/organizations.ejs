@@ -1,6 +1,7 @@
 <%- include('partials/header', { title }) %>
 
     <main class="container">
+
         <section class="page-intro">
             <h1>
                 <%= title %>
@@ -10,6 +11,12 @@
                 Meet our partner organizations working to make
                 a positive difference in communities.
             </p>
+
+            <div class="project-actions">
+                <a href="/new-organization" class="action-button">
+                    + Create New Organization
+                </a>
+            </div>
         </section>
 
         <section class="organization-grid">
@@ -50,6 +57,7 @@
                             <% } %>
 
         </section>
+
     </main>
 
     <%- include('partials/footer') %>

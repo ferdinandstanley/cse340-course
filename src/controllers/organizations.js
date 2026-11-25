@@ -2,51 +2,89 @@
 import {
     getAllOrganizations,
     getOrganizationDetails,
+    createOrganization,
     updateOrganization
 } from '../models/organizations.js';
 
 import { getProjectsByOrganizationId } from '../models/projects.js';
 
 // Display all organizations
-const showOrganizationsPage = async (req, res) => {
-    const organizations = await getAllOrganizations();
-    const title = 'Our Partner Organizations';
+const showOrganizationsPage = async (req, res, next) => {
+    try {
+        const organizations = await getAllOrganizations();
+        const title = 'Our Partner Organizations';
 
-    res.render('organizations', {
-        title,
-        organizations
-    });
+        res.render('organizations', {
+            title,
+            organizations
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 // Display one organization's details and projects
-const showOrganizationDetailsPage = async (req, res) => {
-    const organizationId = req.params.id;
+const showOrganizationDetailsPage = async (req, res, next) => {
+    try {
+        const organizationId = req.params.id;
 
-    const organizationDetails = await getOrganizationDetails(organizationId);
+        const organizationDetails = await getOrganizationDetails(organizationId);
 
-    if (!organizationDetails) {
-        const err = new Error('Organization Not Found');
-        err.status = 404;
-        throw err;
+        if (!organizationDetails) {
+            const err = new Error('Organization Not Found');
+            err.status = 404;
+            throw err;
+        }
+
+        const projects = await getProjectsByOrganizationId(organizationId);
+
+        const title = organizationDetails.name;
+
+        res.render('organization', {
+            title,
+            organizationDetails,
+            projects
+        });
+    } catch (error) {
+        next(error);
     }
+};
 
-    const projects = await getProjectsByOrganizationId(organizationId);
-
-    const title = organizationDetails.name;
-
-    res.render('organization', {
-        title,
-        organizationDetails,
-        projects
+// Display the new organization form
+const showNewOrganizationForm = (req, res) => {
+    res.render('new-organization', {
+        title: 'Create New Organization',
+        organization: {}
     });
 };
 
-export {
-    showOrganizationsPage,
-    showOrganizationDetailsPage
+// Process the new organization form
+const processNewOrganizationForm = async (req, res, next) => {
+    try {
+        const {
+            name,
+            description,
+            contactEmail,
+            logoFilename
+        } = req.body;
+
+        const newOrganization = await createOrganization(
+            name,
+            description,
+            contactEmail,
+            logoFilename
+        );
+
+        req.flash('success', 'Organization created successfully!');
+
+        res.redirect(`/organization/${newOrganization.organization_id}`);
+    } catch (error) {
+        next(error);
+    }
 };
 
-export async function showEditOrganizationForm(req, res, next) {
+// Display the edit organization form
+const showEditOrganizationForm = async (req, res, next) => {
     try {
         const organizationId = req.params.id;
 
@@ -65,9 +103,10 @@ export async function showEditOrganizationForm(req, res, next) {
     } catch (error) {
         next(error);
     }
-}
+};
 
-export async function processEditOrganizationForm(req, res, next) {
+// Process the edit organization form
+const processEditOrganizationForm = async (req, res, next) => {
     try {
         const organizationId = req.params.id;
 
@@ -86,11 +125,19 @@ export async function processEditOrganizationForm(req, res, next) {
             logoFilename
         );
 
-        // Display success message
         req.flash('success', 'Organization updated successfully!');
 
         res.redirect(`/organization/${organizationId}`);
     } catch (error) {
         next(error);
     }
-}
+};
+
+export {
+    showOrganizationsPage,
+    showOrganizationDetailsPage,
+    showNewOrganizationForm,
+    processNewOrganizationForm,
+    showEditOrganizationForm,
+    processEditOrganizationForm
+};

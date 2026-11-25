@@ -1,7 +1,17 @@
 <%- include('partials/header') %>
 
     <main class="container">
-        <h1>Edit Service Project</h1>
+        <% if (typeof errors !=='undefined' && errors.length> 0) { %>
+            <div class="alert error">
+                <ul>
+                    <% errors.forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+            <% } %>
 
         <form action="/edit-project/<%= project.project_id %>" method="POST">
 

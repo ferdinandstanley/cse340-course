@@ -1,3 +1,4 @@
+
 import { body, validationResult } from 'express-validator';
 
 // Organization validation rules
@@ -25,7 +26,7 @@ export const organizationValidation = [
         .normalizeEmail()
 ];
 
-// Check organization validation results
+// Check organization edit validation results
 export const checkOrganizationData = (req, res, next) => {
     const errors = validationResult(req);
 
@@ -38,6 +39,21 @@ export const checkOrganizationData = (req, res, next) => {
                 contact_email: req.body.contactEmail,
                 logo_filename: req.body.logoFilename
             },
+            errors: errors.array()
+        });
+    }
+
+    next();
+};
+
+// Check new organization validation results
+export const checkNewOrganizationData = (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).render('new-organization', {
+            title: 'Create New Organization',
+            organization: req.body,
             errors: errors.array()
         });
     }
@@ -81,7 +97,7 @@ export const projectValidation = [
         .withMessage('Please select a valid organization.')
 ];
 
-// Check project validation results
+// Check new project validation results
 export const checkProjectData = async (req, res, next) => {
     const errors = validationResult(req);
 
@@ -97,6 +113,37 @@ export const checkProjectData = async (req, res, next) => {
                 organizations,
                 errors: errors.array(),
                 project: req.body
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+    next();
+};
+
+// Check edit project validation results
+export const checkEditProjectData = async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        try {
+            const { getAllOrganizations } =
+                await import('../models/organizations.js');
+
+            const organizations = await getAllOrganizations();
+
+            const project = {
+                ...req.body,
+                project_id: req.params.id,
+                organization_id: Number(req.body.organizationId)
+            };
+
+            return res.status(400).render('edit-project', {
+                title: 'Edit Service Project',
+                project,
+                organizations,
+                errors: errors.array()
             });
         } catch (error) {
             return next(error);

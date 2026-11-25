@@ -1,0 +1,67 @@
+<%- include('partials/header') %>
+
+    <main class="container">
+        <section class="form-container">
+            <h1>Create New Organization</h1>
+
+            <p>
+                Complete the form below to register a new partner organization.
+            </p>
+
+            <% if (errors && errors.length> 0) { %>
+                <div class="alert error">
+                    <ul>
+                        <% errors.forEach(error=> { %>
+                            <li>
+                                <%= error.msg %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                </div>
+                <% } %>
+
+                    <form action="/new-organization" method="POST">
+
+                        <div class="form-group">
+                            <label for="name">Organization Name</label>
+                            <input type="text" id="name" name="name" value="<%= organization.name || '' %>" required
+                                minlength="3" maxlength="150">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Organization Description</label>
+                            <textarea id="description" name="description" rows="5" maxlength="500"
+                                required><%= organization.description || '' %></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactEmail">Contact Email</label>
+                            <input type="email" id="contactEmail" name="contactEmail"
+                                value="<%= organization.contactEmail || '' %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="logoFilename">Logo Filename</label>
+                            <input type="text" id="logoFilename" name="logoFilename"
+                                value="<%= organization.logoFilename || '' %>" placeholder="example-logo.png">
+                            <small>
+                                Enter the filename of the organization's logo
+                                stored in your public/images folder.
+                            </small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="action-button">
+                                Create Organization
+                            </button>
+
+                            <a href="/organizations" class="action-button secondary-button">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>

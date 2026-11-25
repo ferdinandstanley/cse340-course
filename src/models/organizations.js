@@ -33,6 +33,36 @@ export const getOrganizationDetails = async (organizationId) => {
     return result.rows[0];
 };
 
+// Create a new organization
+export const createOrganization = async (
+    name,
+    description,
+    contactEmail,
+    logoFilename
+) => {
+    const sql = `
+        INSERT INTO organization (
+            name,
+            description,
+            contact_email,
+            logo_filename
+        )
+        VALUES ($1, $2, $3, $4)
+        RETURNING organization_id;
+    `;
+
+    const values = [
+        name,
+        description,
+        contactEmail,
+        logoFilename
+    ];
+
+    const result = await db.query(sql, values);
+
+    return result.rows[0];
+};
+
 // Update an existing organization
 export const updateOrganization = async (
     organizationId,
